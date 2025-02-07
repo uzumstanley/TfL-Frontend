@@ -1,26 +1,29 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background: #f4f4f4;
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-.container {
-  padding: 20px;
-}
-
-input {
-  padding: 10px;
+.search-input {
+  width: 300px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   margin-right: 10px;
 }
 
-button {
-  padding: 10px;
+.search-button {
+  padding: 12px 20px;
+  font-size: 16px;
   background: #007bff;
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 5px;
 }
 
-button:hover {
+.search-button:hover {
   background: #0056b3;
 }

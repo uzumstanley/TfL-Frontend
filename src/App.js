@@ -15,25 +15,36 @@ function App() {
     if (search.trim() === "") {
       getBusStops().then(setBusStops);
     } else {
-      searchBusStops(search).then(setBusStops);
+      console.log(`Searching for: ${search}`); // Debugging
+      const results = await searchBusStops(search);
+      console.log("Search Results:", results); // Debugging
+      setBusStops(results);
     }
   };
 
   return (
     <div className="container">
       <h1>🚌 TfL Bus Stop Tracker</h1>
-      <input
-        type="text"
-        placeholder="Search by stop name..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
-
-      <MapContainer center={[51.5074, -0.1278]} zoom={12} style={{ height: "500px", width: "100%" }}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Enter bus stop name..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="search-input"
         />
+        <button onClick={handleSearch} className="search-button">🔍 Search</button>
+      </div>
+
+      <MapContainer
+  center={[51.5074, -0.1278]}
+  zoom={12}
+  style={{ height: "500px", width: "100%" }}
+  scrollWheelZoom={true} // Allows scrolling to zoom in/out
+  dragging={true} // Allows dragging the map
+  doubleClickZoom={true} // Allows zooming by double-click
+>
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {busStops.map((stop, index) => (
           <Marker key={index} position={[stop.Y, stop.X]}>
             <Popup>
